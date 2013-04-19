@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,5 +14,6 @@
     </head>
     <body>
         <h1>Some error has occurred, please try after some time.  </h1>
+        <h4>Error message: <s:property value="message" /> </h4>
     </body>
 </html>

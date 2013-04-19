@@ -5,26 +5,67 @@
 package com.lecturersnotes.interceptor;
 
 import com.opensymphony.xwork2.ActionInvocation;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.interceptor.Interceptor;
+import java.sql.PreparedStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import org.apache.struts2.StrutsStatics;
+import javax.servlet.http.HttpServletRequest;
+
+
+
+import com.lecturersnotes.sql.SQLConnection;
 
 /**
  *
  * @author Basha Shaik
  */
-public class LoginInterceptor implements Interceptor {
-    
+public class LoginInterceptor implements Interceptor, StrutsStatics {
+    Connection con;
+    PreparedStatement ps;
+    String message;
     public LoginInterceptor() {
     }
     
     public void destroy() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        try{
+            con.close();
+        }
+        catch(SQLException e){
+            System.out.println(e);
+        }
     }
     
     public void init() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        SQLConnection sqlCon=new SQLConnection();
+        sqlCon.init();
+        con=sqlCon.getConnection();
+        try{
+         ps=con.prepareStatement("select * from registration where email=? and password=? ");   
+        }
+        catch(SQLException e){
+            System.out.println(e);
+        }
     }
     
     public String intercept(ActionInvocation actionInvocation) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String email;
+        String password;
+        String result="error";
+        ActionContext context=actionInvocation.getInvocationContext();
+        HttpServletRequest request=(HttpServletRequest)context.get(HTTP_REQUEST);
+        email=request.getParameter("username");
+        password= request.getParameter("password");
+        ps.setString(1, email);
+        ps.setString(2, password);
+        ResultSet rs=ps.executeQuery();
+        if(rs.next()){
+            String name=rs.getString("name");
+            result=actionInvocation.invoke();
+        }
+        return result;
     }
 }

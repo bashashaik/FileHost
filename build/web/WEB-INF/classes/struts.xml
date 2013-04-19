@@ -3,11 +3,15 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <!-- Configuration for the default package. -->   
-    <package name="default" extends="struts-default">
+    <!-- Configuration for the default package. -->  
+    <constant name="struts.devMode" value="true" />  
+    <package name="default" extends="struts-default" namespace="/">
         <interceptors>
             <interceptor name="loginInterceptor" class="com.lecturersnotes.interceptor.LoginInterceptor" />
         </interceptors>
+        <action name="home">
+            <result>/home.jsp</result>
+        </action>
         <action name="login" class="com.lecturersnotes.action.Login">
             <interceptor-ref name="loginInterceptor" />
             <result name="success">/home.jsp</result>
