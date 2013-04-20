@@ -16,7 +16,7 @@
     <center>
         <h1>Welcome to Lecturersnotes</h1>
         <s:form action="login" method="post">
-            <s:textfield key="username" label="Username" />
+            <s:textfield key="email" label="Username" />
             <s:password key="password" label="Password" />
             <s:submit value="login" />
         </s:form>
@@ -26,7 +26,7 @@
             <s:textfield key="registerEmail" label="Email ID" />
             <s:password key="registerPassword" label="Password" />
             <s:submit value="register" />
-        </s:form>
+        </s:form> 
     </center>
     </body>
 </html>

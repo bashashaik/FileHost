@@ -14,9 +14,9 @@
     </head>
     <body>
     <center>
-        <h3>Welcome</h3>
+        <h3>Welcome <s:property value="#session.name" /></h3>
         <s:form action="upload" enctype="multipart/form-data">
-            <s:file key="file" label="Select your file " />
+            <s:file key="myFile" label="Select your file " />
             <s:submit value="upload"/>
         </s:form>
     </center>

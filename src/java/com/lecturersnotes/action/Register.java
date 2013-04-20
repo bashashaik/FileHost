@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.io.File;
 
 
 /**
@@ -26,6 +27,9 @@ public class Register extends ActionSupport {
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
+    String filePath="C:\\Basha\\dev\\uploads";
+    String fileName;
+    
 
     public String getMessage() {
         return message;
@@ -69,6 +73,10 @@ public class Register extends ActionSupport {
         ps.setString(3, registerEmail);
         int nou= ps.executeUpdate();
         if(nou==1){
+            fileName=registerEmail;
+            File newFile= new File(filePath, registerEmail);
+            newFile.mkdir();
+            
             result=SUCCESS;
         }
         message="Error in update";

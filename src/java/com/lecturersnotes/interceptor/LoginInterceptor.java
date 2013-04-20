@@ -7,14 +7,13 @@ package com.lecturersnotes.interceptor;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.interceptor.Interceptor;
-import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import org.apache.struts2.StrutsStatics;
 import javax.servlet.http.HttpServletRequest;
-
+import java.util.Map;
 
 
 import com.lecturersnotes.sql.SQLConnection;
@@ -54,10 +53,11 @@ public class LoginInterceptor implements Interceptor, StrutsStatics {
     public String intercept(ActionInvocation actionInvocation) throws Exception {
         String email;
         String password;
+        Map<String, Object> sessionMap;
         String result="error";
         ActionContext context=actionInvocation.getInvocationContext();
         HttpServletRequest request=(HttpServletRequest)context.get(HTTP_REQUEST);
-        email=request.getParameter("username");
+        email=request.getParameter("email");
         password= request.getParameter("password");
         ps.setString(1, email);
         ps.setString(2, password);
@@ -65,6 +65,9 @@ public class LoginInterceptor implements Interceptor, StrutsStatics {
         if(rs.next()){
             String name=rs.getString("name");
             result=actionInvocation.invoke();
+            sessionMap=context.getSession();
+            sessionMap.put("name", name);
+            sessionMap.put("email", email);
         }
         return result;
     }

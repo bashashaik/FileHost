@@ -6,12 +6,14 @@ package com.lecturersnotes.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+
 /**
  *
  * @author Basha Shaik
  */
 public class Login extends ActionSupport {
     
+   
     public Login() {
     }
     
