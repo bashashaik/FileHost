@@ -23,11 +23,13 @@
             <result name="error">/error.jsp</result>
         </action>
         <action name="upload" class="com.lecturersnotes.action.Home" method="upload">
+            <interceptor-ref name="defaultStack" />
             <interceptor-ref name="fileUpload">
-                <param name="maximumSize">1000000</param>
-                <param name="allowedTypes">image/jpg, image/gif</param>
+                <param name="maximumSize">52428800</param>
+                <!-- 52428800 = 50MB -->
+                <param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
             </interceptor-ref>
-            <result name="success">/home.jsp</result>
+            <result name="success" type="redirect">/home</result>
             <result name="error">/error.jsp</result>
         </action>
     </package>

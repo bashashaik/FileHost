@@ -23,8 +23,8 @@ public class Home extends ActionSupport implements StrutsStatics{
     
     private File myFile;
     private String myFileFileName;
-    private String destPath="C:\\Basha\\dev\\uploads\\";
     private String myFileContentType;
+    private String destPath="C:\\Basha\\dev\\uploads\\";
     private String result="error";
     private Map<String, Object> sessionMap;
     private String email;
@@ -41,6 +41,10 @@ public class Home extends ActionSupport implements StrutsStatics{
         this.myFileFileName = myFileFileName;
     }
 
+    public void setFileContentType(String myFileContentType) {
+        this.myFileContentType = myFileContentType;
+    }
+
     public String getMyFileFileName() {
         return myFileFileName;
     }
@@ -50,9 +54,6 @@ public class Home extends ActionSupport implements StrutsStatics{
         return myFileContentType;
     }
 
-    public void setFileContentType(String myFileContentType) {
-        this.myFileContentType = myFileContentType;
-    }
     
     public Home() {
     }
@@ -77,6 +78,8 @@ public class Home extends ActionSupport implements StrutsStatics{
             System.out.println(e);
             e.printStackTrace();
         }
-        return result;
+        finally{
+            return result;
+        }
     }
 }
