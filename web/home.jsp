@@ -6,11 +6,18 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<% 
+    String email=(String)session.getAttribute("email");
+    if(email== null)
+        response.sendRedirect("index.jsp");
+
+%>
+        
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home</title>
     </head>
     <body>
     <center>

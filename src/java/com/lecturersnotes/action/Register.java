@@ -82,7 +82,8 @@ public class Register extends ActionSupport {
         message="Error in update";
         ps.close();
         sqlCon.destroy();
-        
         return result;
     }
+    
+    
 }

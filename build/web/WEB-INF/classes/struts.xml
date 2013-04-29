@@ -8,28 +8,39 @@
     <package name="default" extends="struts-default" namespace="/">
         <interceptors>
             <interceptor name="loginInterceptor" class="com.lecturersnotes.interceptor.LoginInterceptor" />
+            <interceptor name="loginCheck" class="com.lecturersnotes.interceptor.LoginCheck" />
+            <interceptor-stack name="myDefaultInterceptors">
+                <interceptor-ref name="loginCheck" />
+                <interceptor-ref name="defaultStack" />
+            </interceptor-stack>
         </interceptors>
         <action name="home">
             <result>/home.jsp</result>
         </action>
+        
         <action name="login" class="com.lecturersnotes.action.Login" method="execute">
-            
             <interceptor-ref name="loginInterceptor" />
+            <result name="input">/index.jsp</result>
             <result name="success" type="redirect">/home</result>
             <result name="error">/error.jsp</result>
         </action>
-        <action name="register" class="com.lecturersnotes.action.Register">
-            <result name="success" type="redirect">/index.jsp</result>
+        
+        <action name="register" class="com.lecturersnotes.action.Register" method="execute">
+            <result name="input">/index.jsp</result>
+            <result name="success" type="redirect">/index.jsp</result>            
             <result name="error">/error.jsp</result>
         </action>
+        
         <action name="upload" class="com.lecturersnotes.action.Home" method="upload">
-            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="myDefaultInterceptors" />
             <interceptor-ref name="fileUpload">
                 <param name="maximumSize">52428800</param>
                 <!-- 52428800 = 50MB -->
                 <param name="allowedTypes">image/png,image/gif,image/jpeg,image/pjpeg</param>
             </interceptor-ref>
+            <result name="login" type="redirect">/index.jsp</result>
             <result name="success" type="redirect">/home</result>
+            <result name="input">/home.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
     </package>

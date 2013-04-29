@@ -82,4 +82,9 @@ public class Home extends ActionSupport implements StrutsStatics{
             return result;
         }
     }
+    public void validate(){
+        if(myFile== null){
+            addFieldError("myFile","You did not chose any file. ");
+        }
+    }
 }
