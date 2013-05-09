@@ -43,5 +43,14 @@
             <result name="input">/home.jsp</result>
             <result name="error">/error.jsp</result>
         </action>
+        
+        <action name="fileDownload" class="com.lecturersnotes.action.FileDownload" method="post">
+            <result name="success" type="stream">
+	  <param name="contentType">application/octet-stream</param>
+	  <param name="inputName">fileInputStream</param>
+	  <param name="contentDisposition">attachment;filename=""</param>
+	  <param name="bufferSize">2048</param>
+	</result>
+        </action>
     </package>
 </struts>

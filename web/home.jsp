@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@taglib prefix="filelist" uri="/WEB-INF/tlds/listOfFiles" %>
 <% 
     String email=(String)session.getAttribute("email");
     if(email== null)
@@ -26,6 +27,8 @@
             <s:file key="myFile" label="Select your file " />
             <s:submit value="upload"/>
         </s:form>
+        <h3>List of files you uploaded. </h3>
+        <filelist:listOfFiles/>
     </center>
     </body>
 </html>
